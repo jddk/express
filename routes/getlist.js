@@ -7,8 +7,8 @@ router.post('/', function (req, res, next) {
     // 数据
     let list = [{
         title:'测试一',
-        start:'2019-05-11 09:30',
-        end:'2019-05-11 17:10',
+        start:'2019-05-10 09:30',
+        end:'2019-05-10 17:10',
         addr:'武汉光谷',
         join_user:['剑圣','德邦']
     },{
@@ -20,27 +20,33 @@ router.post('/', function (req, res, next) {
     },
     {
         title:'测试三',
-        start:'2019-05-09 09:30',
-        end:'2019-05-09 14:10',
+        start:'2019-05-12 09:30',
+        end:'2019-05-12 14:10',
         addr:'武汉街道口',
         join_user:['亚索']
     },
     {
         title:'测试四',
-        start:'2019-05-15 11:30',
-        end:'2019-05-15 17:10',
+        start:'2019-05-13 11:30',
+        end:'2019-05-13 17:10',
         addr:'武汉中南',
         join_user:['武器大师','光头']
     },
     {
         title:'测试五',
-        start:'2019-05-16 11:30',
-        end:'2019-05-16 12:10',
+        start:'2019-05-14 11:30',
+        end:'2019-05-14 12:10',
         addr:'武汉街道口',
         join_user:['亚索']
     }]
     // 筛选数据
-    let array = list.filter(item=>item.start.split(' ')[0]==body.start&&item.end.split(' ')[0]==body.end)
+    let array = list.filter(item=>{
+        let start1 = new Date(item.start.split(' ')[0]).getTime();
+        let end1 = new Date(item.end.split(' ')[0]).getTime();
+        let start2 = new Date(body.start).getTime()
+        let end2 = new Date(body.end).getTime()
+        return start1 >= start2 && end1 <= end2
+    })
     res.send({
         code:1,
         msg:'获取列表成功',
@@ -48,5 +54,4 @@ router.post('/', function (req, res, next) {
     });
 
 });
-
-module.exports = router;
+    module.exports = router;
