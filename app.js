@@ -19,14 +19,14 @@ app.all("*", function (req, res, next) {
 })
 
 // 引入路由
-var noticesRouter = require('./routes/notices');
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testpostRouter = require('./routes/testpost.js')
 var getlistRouter = require('./routes/getlist.js')
 
 
-app.use('/notices', noticesRouter);
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
