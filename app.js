@@ -5,6 +5,29 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// mongoose
+var mongoose = require('./config/mongoose.js')
+var db = mongoose();
+
+// mysql
+// var mysql = require('mysql')
+// var mysql      = require('mysql');
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'me',
+//   password : 'secret',
+//   database : 'my_db'
+// });
+
+// connection.connect();
+
+// connection.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
+//   if (error) throw error;
+//   console.log('The solution is: ', results[0].solution);
+// });
+
+// connection.end();
+
 app.all("*", function (req, res, next) {
   //设置允许跨域的域名，*代表允许任意域名跨域
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +47,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testpostRouter = require('./routes/testpost.js')
 var getlistRouter = require('./routes/getlist.js')
-
+var setfileRouter = require('./routes/setFile');
 
 app.use('/notices', noticesRouter);
 
@@ -43,6 +66,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testpost', testpostRouter);
 app.use('/getlist',getlistRouter)
+app.use('/setfile',setfileRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
